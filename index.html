@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Trooper Retro Resurgence v1.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a23 0%, #1a1a3e 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .game-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: #2a4a6b;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid #ffd700;
+        }
+
+        .pixel-ship {
+            font-size: 80px;
+            color: #ffd700;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .version {
+            font-size: 1.2em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 60px 0;
+            margin: 40px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            margin: 60px 0;
+            border-radius: 20px;
+        }
+
+        .cta-section h2 {
+            color: #fff;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 50px;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn:hover {
+            background: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .donate-btn {
+            background: #ff9800;
+        }
+
+        .donate-btn:hover {
+            background: #e68900;
+        }
+
+        .support-section {
+            background: rgba(0, 100, 0, 0.1);
+            border: 2px solid #4CAF50;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .inspiring-message {
+            text-align: center;
+            font-style: italic;
+            color: #ccc;
+            margin: 30px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #888;
+            border-top: 1px solid #333;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .section {
+                padding: 40px 20px;
+                margin: 20px 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cta-section h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <header>
+        <div class="container">
+            <div class="game-logo">
+                <div class="pixel-ship">🚀</div>
+            </div>
+            <h1>Space Trooper</h1>
+            <div class="version">Retro Resurgence v1.0</div>
+            <p class="tagline">Classic arcade action meets modern polish in this vertical scrolling shooter adventure!</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2>🎮 Game Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>10 Challenging Levels</h3>
+                    <p>Progressive difficulty with unique mission objectives that will test your piloting skills and strategic thinking.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Professional Voiceover</h3>
+                    <p>Immersive mission briefings guide you through each stage with tactical considerations and objectives.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Custom Built Engine</h3>
+                    <p>Every system programmed from scratch in C/C++ for optimal performance and responsive gameplay.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Time-Critical Missions</h3>
+                    <p>Survive intense firefights or eliminate target quotas within specified timeframes for maximum excitement.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>👨‍💻 Development Journey</h2>
+            <p style="text-align: center; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
+                This marks my debut game release, created while learning C/C++ from the ground up. 
+                The development process spanned several months of coding, testing, and refinement to deliver 
+                a polished arcade experience. Every enemy AI pattern and weapon mechanic was programmed 
+                specifically for this title, built on custom architecture that prioritizes player responsiveness.
+            </p>
+        </section>
+
+        <div class="cta-section">
+            <h2>🆓 Play Now - Completely Free!</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Download and start your space adventure today!</p>
+            <a href="#" class="download-btn">Download Game</a>
+        </div>
+
+        <section class="section support-section">
+            <h2>💝 Support Development</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px;">
+                Space Trooper Retro Resurgence v1.0 is completely free! You can support my game development journey just by playing the game. Your feedback and enjoyment fuel my passion to keep creating.
+            </p>
+            
+            <div class="inspiring-message">
+                "Every great game started with someone's first attempt and a dream to create something amazing. Your support doesn't just fund development—it fuels the journey of turning coding curiosity into interactive adventures. Together, we can prove that passion and persistence can create games that bring joy to players everywhere."
+            </div>
+
+            <div class="contact-info">
+                <p>For feedback, suggestions, or contributions:</p>
+                <a href="mailto:powerkomputing@gmail.com">powerkomputing@gmail.com</a>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://www.paypal.com/donate/?hosted_button_id=6GV7NWAJF6V4E" class="download-btn donate-btn" target="_blank">
+                    Support the Mission 🚀
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔮 Future Plans</h2>
+            <p style="text-align: center; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
+                The roadmap includes substantial content expansions featuring diverse player ship selections and 
+                expanded enemy vessel varieties. I'm simultaneously developing a proprietary game engine with 
+                enhanced configurability options. While established game development tools exist, creating custom 
+                solutions provides deeper understanding of game architecture and unlimited creative control.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Space Trooper Retro Resurgence. Developed with passion and C/C++.</p>
+            <p>Contact: <a href="mailto:powerkomputing@gmail.com">powerkomputing@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Create animated stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize stars when page loads
+        window.addEventListener('load', createStars);
+
+        // Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
